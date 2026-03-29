@@ -46,6 +46,8 @@ export default function Chatbot() {
     const greetings = ["hi", "hello", "hey", "hii", "hiii", "helo", "hai", "hola", "namaste", "vanakkam"];
     const howAreYou = ["how are you", "how r u", "how are u", "how r you", "hru", "wassup", "whats up", "what's up"];
     const whoAreYou = ["who are you", "who r u", "who are u", "what are you", "what r u", "your name", "ur name"];
+    const tellAboutYourself = ["tell me about yourself", "about yourself", "introduce yourself", "tell about yourself", "tell me about you"];
+    const whatCanYouDo = ["what can you do", "what can you help", "how can you help", "what do you do", "your capabilities"];
     const thanks = ["thank you", "thanks", "thankyou", "thx", "ty"];
     const bye = ["bye", "goodbye", "good bye", "see you", "see ya", "cya"];
     
@@ -57,6 +59,16 @@ export default function Chatbot() {
     // Check for "how are you"
     if (howAreYou.some(h => lowerMsg.includes(h))) {
       return "I'm doing great, thank you for asking! I'm here to help you with any questions about ProjectFlow. Feel free to pick a question from the list or ask me anything!";
+    }
+    
+    // Check for "tell me about yourself"
+    if (tellAboutYourself.some(t => lowerMsg.includes(t))) {
+      return "I'm the ProjectFlow Assistant! I'm here to help answer your questions about our project management platform. I can tell you about features, pricing, how to get started, security, integrations, and much more. Feel free to ask me anything or select from the suggested questions!";
+    }
+    
+    // Check for "what can you do"
+    if (whatCanYouDo.some(w => lowerMsg.includes(w))) {
+      return "I can help you with information about ProjectFlow - our features, pricing plans, how to sign up, security practices, available integrations, and general questions about project management. I can also answer common questions about getting started. Just ask away!";
     }
     
     // Check for "who are you"
@@ -254,11 +266,16 @@ export default function Chatbot() {
               </div>
             ) : (
               <button
-                onClick={handleShowQuestions}
-                className={`w-full py-3 px-4 rounded-lg text-xs font-medium transition-all cursor-pointer border ${
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleShowQuestions();
+                }}
+                className={`w-full py-3 px-4 rounded-lg text-xs font-medium transition-all cursor-pointer border select-none ${
                   isDark
-                    ? "bg-[hsl(220,15%,16%)] hover:bg-[hsl(220,15%,20%)] text-[hsl(210,80%,60%)] border-[hsl(210,80%,40%)]"
-                    : "bg-[hsl(210,50%,96%)] hover:bg-[hsl(210,50%,92%)] text-[hsl(210,85%,45%)] border-[hsl(210,85%,70%)]"
+                    ? "bg-[hsl(220,15%,16%)] hover:bg-[hsl(220,15%,20%)] text-[hsl(210,80%,60%)] border-[hsl(210,80%,40%)] active:bg-[hsl(220,15%,25%)]"
+                    : "bg-[hsl(210,50%,96%)] hover:bg-[hsl(210,50%,92%)] text-[hsl(210,85%,45%)] border-[hsl(210,85%,70%)] active:bg-[hsl(210,50%,88%)]"
                 }`}
               >
                 Show Suggested Questions
