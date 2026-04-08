@@ -13,6 +13,7 @@ export interface Project {
   name: string
   description: string | null
   status: 'active' | 'completed' | 'archived'
+  color: string | null
   user_id: string
   created_at: string
   updated_at: string
